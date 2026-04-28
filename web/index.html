@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>minigrad | Backpropagation Visualizer</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">minigrad</p>
+                <h1>Backpropagation, animated</h1>
+                <p class="lede">
+                    A small web interface for exploring the exact micrograd neuron:
+                    x1, x2, w1, w2, b, the intermediate sums, and the tanh output.
+                </p>
+            </div>
+            <div class="hero-card">
+                <div class="stat">
+                    <span>Phase</span>
+                    <strong id="phaseLabel">Idle</strong>
+                </div>
+                <div class="stat">
+                    <span>Step</span>
+                    <strong id="stepLabel">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Output</span>
+                    <strong id="outputLabel">0.0000</strong>
+                </div>
+            </div>
+        </header>
+
+        <main class="layout">
+            <section class="stage-panel">
+                <div class="toolbar">
+                    <button id="playBtn">Play</button>
+                    <button id="pauseBtn">Pause</button>
+                    <button id="stepBtn">Step</button>
+                    <button id="resetBtn">Reset</button>
+                    <label class="speed-control">
+                        Speed
+                        <input id="speedInput" type="range" min="0.5" max="2.5" step="0.25" value="1" />
+                        <span id="speedLabel">1.0x</span>
+                    </label>
+                </div>
+
+                <div class="toolbar inputs">
+                    <label>
+                        x1
+                        <input id="x1Input" type="range" min="-2" max="2" step="0.1" value="2" />
+                        <span id="x1Value">2.0</span>
+                    </label>
+                    <label>
+                        x2
+                        <input id="x2Input" type="range" min="-2" max="2" step="0.1" value="0" />
+                        <span id="x2Value">0.0</span>
+                    </label>
+                    <label>
+                        w1
+                        <input id="w1Input" type="range" min="-4" max="4" step="0.1" value="-3" />
+                        <span id="w1Value">-3.0</span>
+                    </label>
+                    <label>
+                        w2
+                        <input id="w2Input" type="range" min="-4" max="4" step="0.1" value="1" />
+                        <span id="w2Value">1.0</span>
+                    </label>
+                    <label>
+                        b
+                        <input id="bInput" type="range" min="-10" max="10" step="0.0001" value="6.8814" />
+                        <span id="bValue">6.8814</span>
+                    </label>
+                </div>
+
+                <div class="canvas-wrap">
+                    <svg id="networkSvg" viewBox="0 0 1280 700"
+                        aria-label="Backpropagation network visualization"></svg>
+                </div>
+
+                <label class="timeline">
+                    Timeline
+                    <input id="timelineInput" type="range" min="0" max="1" step="0.001" value="0" />
+                </label>
+            </section>
+
+            <aside class="details-panel">
+                <section class="panel-card">
+                    <h2>Current state</h2>
+                    <pre id="stateOutput">Loading...</pre>
+                </section>
+                <section class="panel-card">
+                    <h2>How it works</h2>
+                    <ol>
+                        <li>Forward pass computes x1*w1, x2*w2, their sum, and tanh(n).</li>
+                        <li>Backward pass seeds o.grad = 1 and propagates gradients backward.</li>
+                        <li>The sidebar shows every intermediate value from the graph.</li>
+                    </ol>
+                </section>
+            </aside>
+        </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>

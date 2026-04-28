@@ -63,6 +63,35 @@ Open `notebooks/1.ipynb` in your preferred notebook UI, pick the `Python (minigr
 and run the cells. Cell 4 (the graph drawing cell) will produce an SVG visualization if
 Graphviz is available on PATH.
 
+**Running the web visualizer**
+
+The browser app lives in `web/` and does not need a build step. From the project root, run:
+
+```bash
+python -m http.server 8000 --directory web
+```
+
+Then open:
+
+```text
+http://localhost:8000/
+```
+
+If you prefer to use the project environment explicitly, this also works:
+
+```bash
+cd /home/ajana/Code/minigrad
+uv run python -m http.server 8000 --directory web
+```
+
+The page includes Play/Pause/Step controls, a timeline scrubber, and sliders for `x1`, `x2`, and the target value.
+
+**Animated preview**
+
+The README now includes a looping GIF stitched from 11 real browser snapshots from the web visualizer, covering the initial stage plus every step. Open the interactive page above for the full experience.
+
+![Backpropagation animation](assets/backprop-animation.gif)
+
 **Troubleshooting**
 
 - If you see "failed to execute PosixPath('dot')" or `ExecutableNotFound`, install the

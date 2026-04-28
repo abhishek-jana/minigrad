@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" role="img" aria-labelledby="title desc">
+  <title id="title">minigrad backpropagation animation preview</title>
+  <desc id="desc">Animated preview of the micrograd neuron showing forward and backward passes with directional arrows.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1220"/>
+      <stop offset="50%" stop-color="#101a31"/>
+      <stop offset="100%" stop-color="#0a1020"/>
+    </linearGradient>
+    <linearGradient id="edgeGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7be0b0"/>
+      <stop offset="100%" stop-color="#66d9ef"/>
+    </linearGradient>
+    <marker id="arrowForward" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8ceec0"/>
+    </marker>
+    <marker id="arrowBack" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff8f8f"/>
+    </marker>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .bg { fill: url(#bg); }
+      .panel { fill: rgba(255,255,255,0.04); stroke: rgba(160,190,255,0.14); stroke-width: 1.5; }
+      .label { fill: #d9e7ff; font: 600 20px/1.2 "Segoe UI", sans-serif; letter-spacing: 0.03em; }
+      .small { fill: #a9bce8; font: 500 16px/1.2 "Segoe UI", sans-serif; }
+      .value { fill: #f7fbff; font: 700 18px/1.2 "Segoe UI", sans-serif; }
+      .node { fill: #111c34; stroke: rgba(211,226,255,0.28); stroke-width: 2.5; }
+      .node-core { fill: rgba(255,255,255,0.03); }
+      .node-glow { filter: url(#glow); opacity: 0; animation: pulse 10s linear infinite; }
+      .edge { fill: none; stroke-width: 4; stroke-linecap: round; opacity: 0.18; }
+      .forward { stroke: url(#edgeGlow); marker-end: url(#arrowForward); animation: forwardFlow 10s linear infinite; }
+      .backward { stroke: #ff8f8f; marker-start: url(#arrowBack); animation: backwardFlow 10s linear infinite; }
+      .nodePulse { animation: nodePulse 10s linear infinite; }
+      .stageTitle { fill: #eff5ff; font: 700 28px/1.2 "Segoe UI", sans-serif; }
+      .stageText { fill: #b7c7ef; font: 500 16px/1.5 "Segoe UI", sans-serif; }
+      .subtle { opacity: 0.42; }
+      @keyframes forwardFlow {
+        0%, 3% { opacity: 0.18; stroke-width: 4; }
+        5%, 11% { opacity: 1; stroke-width: 6; }
+        13%, 100% { opacity: 0.18; stroke-width: 4; }
+      }
+      @keyframes backwardFlow {
+        0%, 48% { opacity: 0.14; stroke-width: 4; }
+        50%, 57% { opacity: 1; stroke-width: 6; }
+        59%, 100% { opacity: 0.14; stroke-width: 4; }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0; }
+        5%, 12% { opacity: 0.45; }
+        50%, 58% { opacity: 0.45; }
+        60%, 100% { opacity: 0; }
+      }
+      @keyframes nodePulse {
+        0%, 3% { transform: scale(1); }
+        5%, 11% { transform: scale(1.06); }
+        13%, 49% { transform: scale(1); }
+        50%, 57% { transform: scale(1.06); }
+        59%, 100% { transform: scale(1); }
+      }
+      .nodeGroup { transform-box: fill-box; transform-origin: center; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="700" rx="36"/>
+  <rect class="panel" x="28" y="28" width="1224" height="644" rx="28"/>
+
+  <text class="stageTitle" x="64" y="74">Backpropagation, animated</text>
+  <text class="stageText" x="64" y="104">The exact micrograd neuron: forward flow first, then gradients flow back with reverse arrows.</text>
+
+  <text class="small" x="126" y="166" text-anchor="middle">Inputs</text>
+  <text class="small" x="406" y="166" text-anchor="middle">Products</text>
+  <text class="small" x="686" y="166" text-anchor="middle">Sum and bias</text>
+  <text class="small" x="1138" y="166" text-anchor="middle">Output</text>
+
+  <g class="nodeGroup nodePulse" style="animation-delay: 0s;" transform="translate(0 0)">
+    <circle class="node node-glow" cx="126" cy="270" r="54"/>
+    <circle class="node node-core" cx="126" cy="270" r="48"/>
+    <text class="label" x="126" y="264" text-anchor="middle">x1</text>
+    <text class="value" x="126" y="291" text-anchor="middle">2.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 0.2s;">
+    <circle class="node node-glow" cx="126" cy="430" r="54"/>
+    <circle class="node node-core" cx="126" cy="430" r="48"/>
+    <text class="label" x="126" y="424" text-anchor="middle">x2</text>
+    <text class="value" x="126" y="451" text-anchor="middle">0.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 0.4s;">
+    <circle class="node node-glow" cx="126" cy="590" r="54"/>
+    <circle class="node node-core" cx="126" cy="590" r="48"/>
+    <text class="label" x="126" y="584" text-anchor="middle">w1</text>
+    <text class="value" x="126" y="611" text-anchor="middle">-3.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 0.6s;">
+    <circle class="node node-glow" cx="406" cy="590" r="54"/>
+    <circle class="node node-core" cx="406" cy="590" r="48"/>
+    <text class="label" x="406" y="584" text-anchor="middle">w2</text>
+    <text class="value" x="406" y="611" text-anchor="middle">1.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 0.8s;">
+    <circle class="node node-glow" cx="686" cy="590" r="54"/>
+    <circle class="node node-core" cx="686" cy="590" r="48"/>
+    <text class="label" x="686" y="584" text-anchor="middle">b</text>
+    <text class="value" x="686" y="611" text-anchor="middle">6.8814</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 1s;">
+    <circle class="node node-glow" cx="406" cy="252" r="54"/>
+    <circle class="node node-core" cx="406" cy="252" r="48"/>
+    <text class="label" x="406" y="246" text-anchor="middle">x1*w1</text>
+    <text class="value" x="406" y="273" text-anchor="middle">-6.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 1.2s;">
+    <circle class="node node-glow" cx="406" cy="412" r="54"/>
+    <circle class="node node-core" cx="406" cy="412" r="48"/>
+    <text class="label" x="406" y="406" text-anchor="middle">x2*w2</text>
+    <text class="value" x="406" y="433" text-anchor="middle">0.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 1.4s;">
+    <circle class="node node-glow" cx="686" cy="332" r="54"/>
+    <circle class="node node-core" cx="686" cy="332" r="48"/>
+    <text class="label" x="686" y="326" text-anchor="middle">x1w1+x2w2</text>
+    <text class="value" x="686" y="353" text-anchor="middle">-6.0000</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 1.6s;">
+    <circle class="node node-glow" cx="946" cy="332" r="54"/>
+    <circle class="node node-core" cx="946" cy="332" r="48"/>
+    <text class="label" x="946" y="326" text-anchor="middle">n</text>
+    <text class="value" x="946" y="353" text-anchor="middle">0.8814</text>
+  </g>
+  <g class="nodeGroup nodePulse" style="animation-delay: 1.8s;">
+    <circle class="node node-glow" cx="1138" cy="332" r="54"/>
+    <circle class="node node-core" cx="1138" cy="332" r="48"/>
+    <text class="label" x="1138" y="326" text-anchor="middle">o</text>
+    <text class="value" x="1138" y="353" text-anchor="middle">0.7071</text>
+  </g>
+
+  <path class="edge forward" d="M 180 270 C 260 270, 300 252, 352 252" style="animation-delay: 0s;"/>
+  <path class="edge forward" d="M 180 590 C 260 590, 300 270, 352 252" style="animation-delay: 0.15s;"/>
+  <path class="edge forward" d="M 180 430 C 260 430, 300 412, 352 412" style="animation-delay: 0.3s;"/>
+  <path class="edge forward" d="M 460 590 C 520 590, 570 412, 352 412" style="animation-delay: 0.45s;"/>
+  <path class="edge forward" d="M 460 252 C 540 252, 582 332, 628 332" style="animation-delay: 0.6s;"/>
+  <path class="edge forward" d="M 460 412 C 540 412, 582 332, 628 332" style="animation-delay: 0.75s;"/>
+  <path class="edge forward" d="M 740 332 C 820 332, 860 332, 900 332" style="animation-delay: 0.9s;"/>
+  <path class="edge forward" d="M 740 590 C 820 590, 860 332, 900 332" style="animation-delay: 1.05s;"/>
+  <path class="edge forward" d="M 1000 332 C 1060 332, 1080 332, 1084 332" style="animation-delay: 1.2s;"/>
+
+  <path class="edge backward" d="M 1084 332 C 1070 332, 1040 332, 1000 332" style="animation-delay: 4.8s;"/>
+  <path class="edge backward" d="M 900 332 C 840 332, 790 332, 740 332" style="animation-delay: 5.0s;"/>
+  <path class="edge backward" d="M 900 332 C 840 332, 790 252, 460 252" style="animation-delay: 5.2s;"/>
+  <path class="edge backward" d="M 900 332 C 840 332, 790 412, 460 412" style="animation-delay: 5.4s;"/>
+  <path class="edge backward" d="M 352 252 C 300 252, 260 270, 180 270" style="animation-delay: 5.6s;"/>
+  <path class="edge backward" d="M 352 252 C 300 252, 260 590, 180 590" style="animation-delay: 5.75s;"/>
+  <path class="edge backward" d="M 352 412 C 300 412, 260 430, 180 430" style="animation-delay: 5.9s;"/>
+  <path class="edge backward" d="M 352 412 C 300 412, 260 590, 460 590" style="animation-delay: 6.05s;"/>
+
+  <rect x="60" y="624" width="1160" height="2" fill="rgba(255,255,255,0.08)"/>
+  <text class="stageText subtle" x="64" y="656">Forward flow uses end arrows; backward flow reverses direction with start arrows.</text>
+</svg>
