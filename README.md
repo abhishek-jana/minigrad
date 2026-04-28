@@ -88,7 +88,7 @@ The page includes Play/Pause/Step controls, a timeline scrubber, and sliders for
 
 **Animated preview**
 
-The README now includes a looping GIF stitched from 11 real browser snapshots from the web visualizer, covering the initial stage plus every step. Open the interactive page above for the full experience.
+An animation of the web visualizer is embedded below.
 
 ![Backpropagation animation](assets/backprop-animation.gif)
 
