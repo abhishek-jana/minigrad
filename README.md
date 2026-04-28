@@ -5,6 +5,10 @@ Minimal autograd example inspired by Andrej Karpathy's Micrograd.
 This repository contains a tiny notebook implementation demonstrating a `Value`
 class and a small computation graph visualized with Graphviz.
 
+**Preview**
+
+![Backpropagation animation](assets/backprop-animation.gif)
+
 **Quick start — setup the environment**
 
 1. From the project root, install Python dependencies via `uv`:
@@ -85,12 +89,6 @@ uv run python -m http.server 8000 --directory web
 ```
 
 The page includes Play/Pause/Step controls, a timeline scrubber, and sliders for `x1`, `x2`, and the target value.
-
-**Animated preview**
-
-An animation of the web visualizer is embedded below.
-
-![Backpropagation animation](assets/backprop-animation.gif)
 
 **Troubleshooting**
 
